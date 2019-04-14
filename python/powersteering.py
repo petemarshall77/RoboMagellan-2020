@@ -11,7 +11,7 @@ import time
 
 STEER_MAX = 500
 POWER_MAX = 150
-STEER_TRIM = 40
+STEER_TRIM = 0
 
 class PowerSteering:
 
@@ -87,7 +87,8 @@ class PowerSteering:
                 steer_value = 1500+self.steering+STEER_TRIM
                 power_value = 1500+self.power
     	        commandstring = str(int(steer_value)) + "," + str(int(power_value))
-                self.Serial.write(str(int(steer_value)) + "," + str(int(power_value)) + "\n")
+                self.logger.write("Writing command string; %s" % commandstring)
+                self.Serial.write(commandstring + "\n")
                 self.new_values = False
                 
             time.sleep(0.2) 
