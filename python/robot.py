@@ -6,6 +6,7 @@ import time
 
 from logger import Logger
 from powersteering import PowerSteering
+from compasswitch import Compasswitch
 import usb_probe
 
 class Robot:
@@ -18,12 +19,16 @@ class Robot:
         for port in ports:
             self.logger.write("       %s, %s" % (ports[port], port))
         self.powersteering = PowerSteering(ports['chias'], 9600, self.logger)
+        self.compasswitch = Compasswitch(ports['compasswitch'], 9600, self.logger)
        
-    def initialize(self, powersteering = True):
+    def initialize(self, powersteering = True, compasswitch = True):
         self.logger.write("Robot: initializing")
         if powersteering == True:
             self.powersteering_thread = Thread(target = self.powersteering.run)
             self.powersteering_thread.start()
+        if compasswitch == True:
+            self.compasswitch_thread = Thread(target = self.compasswitch.run)
+            self.compasswitch_thread.start()
        
     def terminate(self):
         self.logger.write("Robot: terminating")

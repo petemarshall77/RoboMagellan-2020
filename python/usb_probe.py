@@ -4,7 +4,8 @@
 import subprocess, re
 
 installed_devices = {
-    '95437313335351D0F171': 'chias'
+    '95437313335351D0F171': 'chias',
+    '9543731333435141F0B2': 'compasswitch'
     }
 
 port_families = ['/dev/ttyACM', '/dev/ttyUSB']
